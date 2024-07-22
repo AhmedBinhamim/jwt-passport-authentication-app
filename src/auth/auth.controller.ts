@@ -13,10 +13,8 @@ export class AuthController {
 
     @Post('login')
     @UseGuards(LocalGuard)
-    login(@Body() authPayLoad: AuthPayloadDto){
-        const user = this.authService.validateUser(authPayLoad);
-        if(!user) throw new HttpException('Invalid Credintials', 401);
-        return user;
+    login(@Req() req: Request){
+       return req.user;
     }
 
     @Get('status')
